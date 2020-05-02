@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+
+      <!-- Title -->
+      <h3 class="mt-4">{{article.title}}</h3>
+
+      <!-- Author -->
+      <p class="lead">
+        
+        {{article.author.username}} tarafından yayınlandı
+      </p>
+
+      <hr>
+
+      <!-- Date/Time -->
+      <p>{{article.created_date}}</p>
+
+      <hr>
+
+      <!-- Preview Image -->
+      {% if article.article_image %}
+      <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+      {% endif %}
+     
+
+      <hr>
+
+      <!-- Post Content -->
+      <p class="lead">
+          {{article.content|safe}}
+      </p>
+
+      <hr>
+
+      <h4>Madde Kapat</h4>
+      <hr>
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    {{form.media}}
+                    <br>
+                    <button type = "submit" class = "btn btn-danger">Madde Kapat</button>
+                </form>
+            </div>
+        </div>
+     
+
+{% endblock body %}
